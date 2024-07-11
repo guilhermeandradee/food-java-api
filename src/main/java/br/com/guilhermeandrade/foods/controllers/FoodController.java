@@ -35,11 +35,11 @@ public class FoodController {
     public ResponseEntity<String> saveFood(@RequestBody FoodRequestDTO data){
         Food foodData = new Food(data);
         repository.save(foodData);
-        return ResponseEntity.ok("Delete succes");
+        return ResponseEntity.ok("Post succes");
     }
 
     @PutMapping("{id}")
-    public FoodResponseDTO updateFood(@PathVariable Long id, @RequestBody FoodRequestDTO data){
+    public ResponseEntity<?> updateFood(@PathVariable Long id, @RequestBody FoodRequestDTO data){
         Optional<Food> optionalFood = repository.findById(id);
 
         if(optionalFood.isPresent()){
@@ -50,9 +50,9 @@ public class FoodController {
             foodToUpdate.setPrice(Objects.requireNonNullElse(data.price(), foodToUpdate.getPrice()));
 
             repository.save(foodToUpdate);
-            return new FoodResponseDTO(foodToUpdate);
+            return ResponseEntity.ok(new FoodResponseDTO(foodToUpdate));
         } else {
-            throw new ResourceNotFoundException("Comida não encontrada");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Comida não encontrada");
         }
     }
 
@@ -65,7 +65,7 @@ public class FoodController {
             return ResponseEntity.ok("Delete succes");
         } else {
             ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-            throw new ResourceNotFoundException("Comida não encontrada");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Comida não encontrada");
         }
     }
 
