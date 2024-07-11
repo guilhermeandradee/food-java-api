@@ -1,5 +1,7 @@
 package br.com.guilhermeandrade.foods.food;
 
-public record FoodRequestDTO(String title, String image, Integer price) {
+import java.math.BigDecimal;
+
+public record FoodRequestDTO(String title, String image, BigDecimal price) {
 
 }

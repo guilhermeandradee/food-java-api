@@ -2,6 +2,8 @@ package br.com.guilhermeandrade.foods.food;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "Food")
 public class Food {
@@ -10,7 +12,7 @@ public class Food {
     private Long id;
     private String title;
     private String image;
-    private Integer price;
+    private BigDecimal price;
 
 
     public Food() {
@@ -34,7 +36,7 @@ public class Food {
         return image;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -50,7 +52,7 @@ public class Food {
         this.image = image;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }
