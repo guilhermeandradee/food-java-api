@@ -35,8 +35,12 @@ public class FoodController {
     @PostMapping
     public ResponseEntity<String> saveFood(@RequestBody FoodRequestDTO data){
         Food foodData = new Food(data);
-        repository.save(foodData);
 
+        if (data == null || foodData.getTitle() == null || foodData.getPrice() == null) {
+            return ResponseEntity.badRequest().body("Dados inválidos ou incompletos");
+        }
+
+        repository.save(foodData);
         System.out.println("criado");
 
         return ResponseEntity.ok("Post succes");
