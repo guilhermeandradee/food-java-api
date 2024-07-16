@@ -37,7 +37,7 @@ public class FoodController {
         Food foodData = new Food(data);
         repository.save(foodData);
 
-        System.out.println("ok");
+        System.out.println("criado");
 
         return ResponseEntity.ok("Post succes");
     }
