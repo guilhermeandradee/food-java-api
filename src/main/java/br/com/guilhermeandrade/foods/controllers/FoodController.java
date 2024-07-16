@@ -31,13 +31,18 @@ public class FoodController {
         return foodList;
     }
 
+    @CrossOrigin(origins = "x", allowedHeaders = "x")
     @PostMapping
     public ResponseEntity<String> saveFood(@RequestBody FoodRequestDTO data){
         Food foodData = new Food(data);
         repository.save(foodData);
+
+        System.out.println("ok");
+
         return ResponseEntity.ok("Post succes");
     }
 
+    @CrossOrigin(origins = "x", allowedHeaders = "x")
     @PutMapping("{id}")
     public ResponseEntity<?> updateFood(@PathVariable Long id, @RequestBody FoodRequestDTO data){
         Optional<Food> optionalFood = repository.findById(id);
@@ -50,12 +55,14 @@ public class FoodController {
             foodToUpdate.setPrice(Objects.requireNonNullElse(data.price(), foodToUpdate.getPrice()));
 
             repository.save(foodToUpdate);
+            System.out.println("ok");
             return ResponseEntity.ok(new FoodResponseDTO(foodToUpdate));
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Comida não encontrada");
         }
     }
 
+    @CrossOrigin(origins = "x", allowedHeaders = "x")
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteFood(@PathVariable Long id){
         Optional<Food> optionalFood = repository.findById(id);
