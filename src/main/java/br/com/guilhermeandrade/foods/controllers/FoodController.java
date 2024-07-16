@@ -32,7 +32,7 @@ public class FoodController {
     }
 
     @CrossOrigin(origins = "x", allowedHeaders = "x")
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<String> saveFood(@RequestBody FoodRequestDTO data){
         Food foodData = new Food(data);
 
